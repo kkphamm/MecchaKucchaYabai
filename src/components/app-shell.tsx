@@ -8,39 +8,32 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 const SECTIONS = [
-  { id: "kana", href: "/", label: "Kana" },
+  { id: "hiragana", href: "/", label: "Hiragana" },
+  { id: "katakana", href: "/katakana", label: "Katakana" },
   { id: "kanji", href: "/kanji", label: "Kanji" },
 ];
 
-export function AppShell({
-  tabs,
-  sideTabs,
-  children,
-}: {
-  tabs?: ReactNode;
-  sideTabs?: ReactNode;
-  children: ReactNode;
-}) {
+export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const reducedMotion = useReducedMotion();
-  const activeSection = pathname === "/kanji" ? "kanji" : "kana";
+  const active = SECTIONS.find((s) => s.href === pathname)?.id ?? "hiragana";
 
   return (
     <div className="flex min-h-full flex-1 flex-col bg-background">
-      <header className="sticky top-0 z-20 border-b border-border bg-background/95 backdrop-blur-sm">
-        <div className="flex w-full items-center gap-4 py-3 pl-3 pr-4 md:pr-6 lg:pr-12 min-[1440px]:pr-24">
-          <TextRoll className="shrink-0 font-kiwi-soda text-[28px] tracking-tight text-foreground">
-            MecchaKucchaYabai
+      <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm">
+        <div className="relative flex w-full items-center gap-4 py-3 pl-3 pr-3">
+          <TextRoll className="shrink-0 font-ham text-[28px] tracking-tight text-foreground">
+            MKY
           </TextRoll>
-          <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <div
               role="tablist"
-              aria-label="Section"
+              aria-label="Content"
               className="inline-flex items-center gap-1 rounded-full border border-border bg-background p-1"
             >
               <AnimatedBackground
-                defaultValue={activeSection}
+                defaultValue={active}
                 onValueChange={(id) => {
                   const section = SECTIONS.find((s) => s.id === id);
                   if (section) router.push(section.href);
@@ -53,7 +46,7 @@ export function AppShell({
                     key={section.id}
                     data-id={section.id}
                     role="tab"
-                    aria-selected={activeSection === section.id}
+                    aria-selected={active === section.id}
                     className={cn(
                       "rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                       "text-foreground/70 data-[checked=true]:text-primary-foreground"
@@ -63,11 +56,10 @@ export function AppShell({
                   </button>
                 ))}
               </AnimatedBackground>
-              {sideTabs && <div className="pl-2">{sideTabs}</div>}
             </div>
-            {tabs}
-            <ThemeToggle />
           </div>
+          <div className="flex-1" />
+          <ThemeToggle />
         </div>
       </header>
       <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 py-16 md:px-6 lg:px-12 min-[1440px]:px-24">

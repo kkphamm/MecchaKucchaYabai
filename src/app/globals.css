@@ -45,7 +45,7 @@
   --color-state-incorrect-bg: var(--state-incorrect-bg);
   --color-state-mastered: var(--state-mastered);
   --font-kana: var(--font-noto-sans-jp), "Hiragino Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-kiwi-soda: var(--font-kiwi-soda), ui-sans-serif, system-ui, sans-serif;
+  --font-ham: var(--font-ham), ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);

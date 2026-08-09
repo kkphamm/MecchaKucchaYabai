@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { AppShell } from "@/components/app-shell";
-import { KanjiTabs } from "@/features/kanji/kanji-tabs";
+import { KanjiLevelSidebar } from "@/features/kanji/kanji-level-sidebar";
 import { KanjiOverview } from "@/features/kanji/overview";
 import { KanjiQuizView, type KanjiQuizResults as KanjiQuizResultsData } from "@/features/kanji/kanji-quiz-view";
 import { KanjiQuizResultsView } from "@/features/kanji/kanji-quiz-results";
@@ -27,15 +26,20 @@ export default function KanjiPage() {
   }
 
   return (
-    <AppShell sideTabs={<KanjiTabs active={activeLevel} onChange={handleLevelChange} />}>
+    <>
       {mode.kind === "overview" && (
-        <KanjiOverview
-          level={activeLevel}
-          kanjiList={kanjiList}
-          progress={progress}
-          onStartQuiz={() => setMode({ kind: "quiz" })}
-          onResetLevel={resetLevel}
-        />
+        <div className="flex gap-6 sm:gap-10">
+          <KanjiLevelSidebar active={activeLevel} onChange={handleLevelChange} />
+          <div className="min-w-0 flex-1">
+            <KanjiOverview
+              level={activeLevel}
+              kanjiList={kanjiList}
+              progress={progress}
+              onStartQuiz={() => setMode({ kind: "quiz" })}
+              onResetLevel={resetLevel}
+            />
+          </div>
+        </div>
       )}
       {mode.kind === "quiz" && (
         <KanjiQuizView
@@ -58,6 +62,6 @@ export default function KanjiPage() {
           }}
         />
       )}
-    </AppShell>
+    </>
   );
 }

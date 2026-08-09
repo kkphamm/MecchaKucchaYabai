@@ -23,6 +23,8 @@ export type TextRollProps = {
   onClick?: () => void;
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
+  /** Fires once, when the mount-triggered roll-in finishes. */
+  onDone?: () => void;
 };
 
 const defaultVariants = {
@@ -47,6 +49,7 @@ export function TextRoll({
   onClick,
   onMouseEnter,
   onMouseLeave,
+  onDone,
 }: TextRollProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -57,7 +60,10 @@ export function TextRoll({
     setIsHovered(true);
     const lastIndex = Math.max(letters.length - 1, 0);
     const lastDelay = Math.max(getEnterDelay(lastIndex), getExitDelay(lastIndex));
-    const timeout = setTimeout(() => setIsHovered(false), (lastDelay + duration) * 1000);
+    const timeout = setTimeout(() => {
+      setIsHovered(false);
+      onDone?.();
+    }, (lastDelay + duration) * 1000);
     return () => clearTimeout(timeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount only
   }, []);
