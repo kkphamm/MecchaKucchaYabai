@@ -29,15 +29,10 @@ export function KanjiOverview({
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-lg font-medium text-foreground">
           {level} Kanji <span className="text-muted-foreground">· {mastered} / {kanjiList.length} mastered</span>
         </h1>
-      </div>
-
-      <KanjiGrid kanjiList={kanjiList} progress={progress} />
-
-      <div className="flex flex-col items-center gap-3 py-4">
         {allMastered ? (
           <div className="flex items-center gap-2 text-base font-medium text-state-mastered">
             <Check aria-hidden="true" className="size-5" />
@@ -50,6 +45,11 @@ export function KanjiOverview({
             Start Quiz
           </Button>
         )}
+      </div>
+
+      <KanjiGrid kanjiList={kanjiList} progress={progress} />
+
+      <div className="flex justify-center py-4">
         <button
           type="button"
           onClick={() => setResetOpen(true)}

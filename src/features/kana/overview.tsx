@@ -34,15 +34,10 @@ export function Overview({
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-lg font-medium text-foreground">
           {label} <span className="text-muted-foreground">· {mastered} / {kanaList.length} mastered</span>
         </h1>
-      </div>
-
-      <KanaGrid kanaList={kanaList} progress={progress} />
-
-      <div className="flex flex-col items-center gap-3 py-4">
         {allMastered ? (
           <div className="flex items-center gap-2 text-base font-medium text-state-mastered">
             <Check aria-hidden="true" className="size-5" />
@@ -55,6 +50,11 @@ export function Overview({
             Start Quiz
           </Button>
         )}
+      </div>
+
+      <KanaGrid kanaList={kanaList} progress={progress} />
+
+      <div className="flex justify-center py-4">
         <button
           type="button"
           onClick={() => setResetOpen(true)}
