@@ -2,6 +2,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { TextRoll } from "@/components/core/text-roll";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
@@ -24,9 +25,9 @@ export function AppShell({
       <header className="sticky top-0 z-20 border-b border-border bg-background/95 backdrop-blur-sm">
         <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 px-4 py-4 md:px-6 lg:px-12 min-[1440px]:px-24">
           <div className="flex items-center gap-6">
-            <span className="text-sm font-semibold tracking-tight text-foreground">
+            <TextRoll className="font-kiwi-soda text-lg tracking-tight text-foreground">
               MecchaKucchaYabai
-            </span>
+            </TextRoll>
             <nav className="flex items-center gap-4">
               {SECTIONS.map((section) => (
                 <Link
