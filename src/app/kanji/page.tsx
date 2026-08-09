@@ -27,7 +27,7 @@ export default function KanjiPage() {
   }
 
   return (
-    <AppShell tabs={<KanjiTabs active={activeLevel} onChange={handleLevelChange} />}>
+    <AppShell sideTabs={<KanjiTabs active={activeLevel} onChange={handleLevelChange} />}>
       {mode.kind === "overview" && (
         <KanjiOverview
           level={activeLevel}

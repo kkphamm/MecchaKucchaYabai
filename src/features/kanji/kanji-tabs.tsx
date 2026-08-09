@@ -1,13 +1,8 @@
 "use client";
-import { AnimatedBackground } from "@/components/core/animated-background";
-import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 import type { JlptLevel } from "@/types/kanji";
 
-const LEVELS: { id: JlptLevel; label: string }[] = [
-  { id: "N5", label: "N5" },
-  { id: "N4", label: "N4" },
-];
+const LEVELS: JlptLevel[] = ["N5", "N4"];
 
 export function KanjiTabs({
   active,
@@ -16,35 +11,28 @@ export function KanjiTabs({
   active: JlptLevel;
   onChange: (level: JlptLevel) => void;
 }) {
-  const reducedMotion = useReducedMotion();
-
   return (
-    <div
-      role="tablist"
-      aria-label="JLPT Level"
-      className="inline-flex items-center gap-1 rounded-full border border-border bg-background p-1"
-    >
-      <AnimatedBackground
-        defaultValue={active}
-        onValueChange={(id) => id && onChange(id as JlptLevel)}
-        className="rounded-full bg-primary"
-        transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 400, damping: 32 }}
-      >
-        {LEVELS.map((level) => (
+    <div role="group" aria-label="JLPT Level" className="flex items-center gap-1 text-sm font-medium">
+      {LEVELS.map((level, i) => (
+        <div key={level} className="flex items-center gap-1">
+          {i > 0 && (
+            <span aria-hidden="true" className="text-muted-foreground">
+              _
+            </span>
+          )}
           <button
-            key={level.id}
-            data-id={level.id}
-            role="tab"
-            aria-selected={active === level.id}
+            type="button"
+            aria-pressed={active === level}
+            onClick={() => onChange(level)}
             className={cn(
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-              "text-foreground/70 data-[checked=true]:text-primary-foreground"
+              "rounded-sm px-0.5 py-1.5 underline-offset-4 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+              active === level ? "text-foreground underline" : "text-muted-foreground hover:text-foreground"
             )}
           >
-            {level.label}
+            {level}
           </button>
-        ))}
-      </AnimatedBackground>
+        </div>
+      ))}
     </div>
   );
 }

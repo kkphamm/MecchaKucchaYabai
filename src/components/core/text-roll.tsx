@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { motion, TargetAndTransition, Transition } from 'motion/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type TextRollProps = {
   children: string;
@@ -51,6 +51,16 @@ export function TextRoll({
   const [isHovered, setIsHovered] = useState(false);
 
   const letters = children.split('');
+
+  // Play the roll once on mount (page-open reveal), independent of hover.
+  useEffect(() => {
+    setIsHovered(true);
+    const lastIndex = Math.max(letters.length - 1, 0);
+    const lastDelay = Math.max(getEnterDelay(lastIndex), getExitDelay(lastIndex));
+    const timeout = setTimeout(() => setIsHovered(false), (lastDelay + duration) * 1000);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once on mount only
+  }, []);
 
   const enterVariants = {
     initial: variants?.enter?.initial || defaultVariants.enter.initial,
