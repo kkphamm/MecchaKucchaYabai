@@ -8,7 +8,7 @@ import { ReadingLegend } from "@/features/kanji/reading-legend";
 import { ResetKanjiProgressDialog } from "@/features/kanji/reset-progress-dialog";
 import { eligiblePool } from "@/features/kanji/kanji-quiz-engine";
 import type { KanjiCharacter, JlptLevel } from "@/types/kanji";
-import type { ProgressMap } from "@/types/kana";
+import { MASTERY_THRESHOLD, type ProgressMap } from "@/types/kana";
 
 export function KanjiOverview({
   level,
@@ -24,7 +24,7 @@ export function KanjiOverview({
   onResetLevel: (level: JlptLevel) => void;
 }) {
   const [resetOpen, setResetOpen] = useState(false);
-  const mastered = kanjiList.filter((k) => (progress[k.id] ?? 0) === 50).length;
+  const mastered = kanjiList.filter((k) => (progress[k.id] ?? 0) === MASTERY_THRESHOLD).length;
   const eligibleCount = eligiblePool(kanjiList, progress).length;
   const allMastered = eligibleCount === 0;
 

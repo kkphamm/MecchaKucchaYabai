@@ -1,5 +1,5 @@
 import { N4_KANJI, N5_KANJI } from "@/data/kanji";
-import type { ProgressMap } from "@/types/kana";
+import { MASTERY_THRESHOLD, type ProgressMap } from "@/types/kana";
 
 export const KANJI_STORAGE_KEY = "mkya:kanji:v1";
 export const KANJI_STORAGE_VERSION = 1;
@@ -15,7 +15,7 @@ function isValidProgressMap(value: unknown, validIds: Set<string>): value is Pro
       typeof count === "number" &&
       Number.isInteger(count) &&
       count >= 0 &&
-      count <= 50
+      count <= MASTERY_THRESHOLD
   );
 }
 
@@ -43,7 +43,7 @@ function selfCheck() {
   if (validateKanjiProgress({ n5: { "bogus-id": 10 }, n4: {} })) {
     throw new Error("kanji-persistence self-check: unknown id was accepted");
   }
-  if (validateKanjiProgress({ n5: { [sampleId]: 51 }, n4: {} })) {
+  if (validateKanjiProgress({ n5: { [sampleId]: MASTERY_THRESHOLD + 1 }, n4: {} })) {
     throw new Error("kanji-persistence self-check: out-of-range count was accepted");
   }
   if (validateKanjiProgress(null) || validateKanjiProgress("not an object")) {

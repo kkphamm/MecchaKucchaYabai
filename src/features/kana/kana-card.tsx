@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { KanaProgressBar } from "@/features/kana/kana-progress-bar";
-import type { KanaCharacter } from "@/types/kana";
+import { MASTERY_THRESHOLD, type KanaCharacter } from "@/types/kana";
 
 export function KanaCard({
   kana,
@@ -9,8 +9,8 @@ export function KanaCard({
   kana: KanaCharacter;
   correctCount: number;
 }) {
-  const mastered = correctCount === 50;
-  const percentage = Math.round((correctCount / 50) * 100);
+  const mastered = correctCount === MASTERY_THRESHOLD;
+  const percentage = Math.round((correctCount / MASTERY_THRESHOLD) * 100);
 
   return (
     <div

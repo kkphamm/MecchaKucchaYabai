@@ -24,13 +24,16 @@ export interface KanaCharacter {
 // Mutable learner progress (persisted, keyed by KanaCharacter.id)
 export type ProgressMap = Record<string, number>;
 
+// Correct-answer count at which a character counts as mastered.
+export const MASTERY_THRESHOLD = 30;
+
 export interface LearnerProgressState {
   hiragana: ProgressMap;
   katakana: ProgressMap;
 }
 
 export function isMastered(id: string, progress: ProgressMap): boolean {
-  return progress[id] === 50;
+  return progress[id] === MASTERY_THRESHOLD;
 }
 
 export type Direction = "KANA_TO_ROMAJI" | "ROMAJI_TO_KANA";

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Check } from "lucide-react";
 import { KanaProgressBar } from "@/features/kana/kana-progress-bar";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { MASTERY_THRESHOLD } from "@/types/kana";
 import type { KanjiCharacter } from "@/types/kanji";
 
 export function KanjiCard({
@@ -16,8 +17,8 @@ export function KanjiCard({
   const [showReadings, setShowReadings] = useState(false);
   const reducedMotion = useReducedMotion();
   const readingsId = useId();
-  const mastered = correctCount === 50;
-  const percentage = Math.round((correctCount / 50) * 100);
+  const mastered = correctCount === MASTERY_THRESHOLD;
+  const percentage = Math.round((correctCount / MASTERY_THRESHOLD) * 100);
   const hasReadings = kanji.onyomi.length > 0 || kanji.kunyomi.length > 0;
 
   return (

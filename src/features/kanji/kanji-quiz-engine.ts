@@ -1,5 +1,5 @@
 import type { KanjiCharacter, KanjiQuizQuestion } from "@/types/kanji";
-import type { ProgressMap } from "@/types/kana";
+import { MASTERY_THRESHOLD, type ProgressMap } from "@/types/kana";
 
 // Pure, framework-free — mirrors features/quiz/quiz-engine.ts, but the
 // kanji quiz only ever asks one direction: kanji -> meaning.
@@ -14,7 +14,7 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 export function eligiblePool(list: KanjiCharacter[], progress: ProgressMap): KanjiCharacter[] {
-  return list.filter((k) => (progress[k.id] ?? 0) !== 50);
+  return list.filter((k) => (progress[k.id] ?? 0) !== MASTERY_THRESHOLD);
 }
 
 export function quizLength(poolSize: number): number {
@@ -56,7 +56,7 @@ export function submitAnswer(question: KanjiQuizQuestion, selectedOptionId: stri
 }
 
 export function applyAnswer(correctCount: number, isCorrect: boolean): number {
-  return isCorrect ? Math.min(50, correctCount + 1) : correctCount;
+  return isCorrect ? Math.min(MASTERY_THRESHOLD, correctCount + 1) : correctCount;
 }
 
 export function computeResults(
@@ -72,8 +72,8 @@ export function computeResults(
     .filter(
       (k): k is KanjiCharacter =>
         !!k &&
-        (progressBeforeQuiz[k.id] ?? 0) !== 50 &&
-        (progressAfterQuiz[k.id] ?? 0) === 50
+        (progressBeforeQuiz[k.id] ?? 0) !== MASTERY_THRESHOLD &&
+        (progressAfterQuiz[k.id] ?? 0) === MASTERY_THRESHOLD
     )
     .filter((k, index, arr) => arr.findIndex((x) => x.id === k.id) === index);
   return { correct, total, newlyMastered };

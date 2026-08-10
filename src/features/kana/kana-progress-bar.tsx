@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { MASTERY_THRESHOLD } from "@/types/kana";
 
 export function KanaProgressBar({
   correctCount,
@@ -7,7 +8,7 @@ export function KanaProgressBar({
   correctCount: number;
   mastered: boolean;
 }) {
-  const percentage = Math.round((correctCount / 50) * 100);
+  const percentage = Math.round((correctCount / MASTERY_THRESHOLD) * 100);
 
   return (
     <div className="flex w-full items-center gap-2">

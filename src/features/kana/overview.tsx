@@ -6,7 +6,7 @@ import { TextEffect } from "@/components/core/text-effect";
 import { KanaGrid } from "@/features/kana/kana-grid";
 import { ResetProgressDialog } from "@/features/kana/reset-progress-dialog";
 import { eligiblePool } from "@/features/quiz/quiz-engine";
-import type { KanaCharacter, ProgressMap, Script } from "@/types/kana";
+import { MASTERY_THRESHOLD, type KanaCharacter, type ProgressMap, type Script } from "@/types/kana";
 
 const SCRIPT_LABEL: Record<Script, string> = {
   hiragana: "Hiragana",
@@ -28,7 +28,7 @@ export function Overview({
 }) {
   const [resetOpen, setResetOpen] = useState(false);
   const label = SCRIPT_LABEL[script];
-  const mastered = kanaList.filter((k) => (progress[k.id] ?? 0) === 50).length;
+  const mastered = kanaList.filter((k) => (progress[k.id] ?? 0) === MASTERY_THRESHOLD).length;
   const eligibleCount = eligiblePool(kanaList, progress).length;
   const allMastered = eligibleCount === 0;
 

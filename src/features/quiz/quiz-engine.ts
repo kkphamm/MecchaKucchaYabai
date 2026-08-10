@@ -1,4 +1,4 @@
-import type { Direction, KanaCharacter, ProgressMap, QuizQuestion } from "@/types/kana";
+import { MASTERY_THRESHOLD, type Direction, type KanaCharacter, type ProgressMap, type QuizQuestion } from "@/types/kana";
 
 // Pure, framework-free implementation of design.md Section 14, Algorithms A-J.
 // No React, no store, no I/O — testable by calling functions directly.
@@ -14,7 +14,7 @@ function shuffle<T>(items: T[]): T[] {
 
 // A — eligible characters (not yet mastered)
 export function eligiblePool(scriptKana: KanaCharacter[], progress: ProgressMap): KanaCharacter[] {
-  return scriptKana.filter((k) => (progress[k.id] ?? 0) !== 50);
+  return scriptKana.filter((k) => (progress[k.id] ?? 0) !== MASTERY_THRESHOLD);
 }
 
 // B — quiz length
@@ -89,9 +89,9 @@ export function submitAnswer(question: QuizQuestion, selectedOptionId: string): 
   return selectedOptionId === question.correctId;
 }
 
-// G/H — apply an answer to a correctCount, capped at 50
+// G/H — apply an answer to a correctCount, capped at MASTERY_THRESHOLD
 export function applyAnswer(correctCount: number, isCorrect: boolean): number {
-  return isCorrect ? Math.min(50, correctCount + 1) : correctCount;
+  return isCorrect ? Math.min(MASTERY_THRESHOLD, correctCount + 1) : correctCount;
 }
 
 // J — quiz results, including which kana were newly mastered by this quiz
@@ -108,8 +108,8 @@ export function computeResults(
     .filter(
       (kana): kana is KanaCharacter =>
         !!kana &&
-        (progressBeforeQuiz[kana.id] ?? 0) !== 50 &&
-        (progressAfterQuiz[kana.id] ?? 0) === 50
+        (progressBeforeQuiz[kana.id] ?? 0) !== MASTERY_THRESHOLD &&
+        (progressAfterQuiz[kana.id] ?? 0) === MASTERY_THRESHOLD
     )
     .filter((kana, index, arr) => arr.findIndex((k) => k.id === kana.id) === index);
   return { correct, total, newlyMastered };

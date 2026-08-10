@@ -1,5 +1,5 @@
 import { HIRAGANA, KATAKANA } from "@/data/kana";
-import type { ProgressMap } from "@/types/kana";
+import { MASTERY_THRESHOLD, type ProgressMap } from "@/types/kana";
 
 export const STORAGE_KEY = "mkya:state:v1";
 export const STORAGE_VERSION = 1;
@@ -15,7 +15,7 @@ function isValidProgressMap(value: unknown, validIds: Set<string>): value is Pro
       typeof count === "number" &&
       Number.isInteger(count) &&
       count >= 0 &&
-      count <= 50
+      count <= MASTERY_THRESHOLD
   );
 }
 
@@ -47,7 +47,7 @@ function selfCheck() {
   if (validateProgress({ hiragana: { "bogus-id": 10 }, katakana: {} })) {
     throw new Error("persistence self-check: unknown id was accepted");
   }
-  if (validateProgress({ hiragana: { [sampleId]: 51 }, katakana: {} })) {
+  if (validateProgress({ hiragana: { [sampleId]: MASTERY_THRESHOLD + 1 }, katakana: {} })) {
     throw new Error("persistence self-check: out-of-range count was accepted");
   }
   if (validateProgress({ hiragana: { [sampleId]: 1.5 }, katakana: {} })) {

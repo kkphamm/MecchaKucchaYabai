@@ -10,13 +10,13 @@ import {
   computeResults,
   applyAnswer,
 } from "./kanji-quiz-engine.ts";
-import type { ProgressMap } from "../../types/kana.ts";
+import { MASTERY_THRESHOLD, type ProgressMap } from "../../types/kana.ts";
 
 const poolSize = N5_KANJI.length;
 
 // eligiblePool
 assert.equal(eligiblePool(N5_KANJI, {}).length, poolSize, "empty progress -> full pool");
-const allMastered: ProgressMap = Object.fromEntries(N5_KANJI.map((k) => [k.id, 50]));
+const allMastered: ProgressMap = Object.fromEntries(N5_KANJI.map((k) => [k.id, MASTERY_THRESHOLD]));
 assert.equal(eligiblePool(N5_KANJI, allMastered).length, 0, "all mastered -> empty pool");
 
 // quizLength
@@ -37,7 +37,7 @@ for (const q of fullQuiz) {
 
 // buildQuiz — small pool
 const smallProgress: ProgressMap = Object.fromEntries(
-  N5_KANJI.slice(3).map((k) => [k.id, 50])
+  N5_KANJI.slice(3).map((k) => [k.id, MASTERY_THRESHOLD])
 );
 const smallQuiz = buildQuiz(N5_KANJI, smallProgress);
 assert.equal(smallQuiz.length, 3, "quiz length matches small eligible pool");
@@ -57,15 +57,15 @@ for (let i = 0; i < 20; i++) {
 }
 
 // applyAnswer cap
-assert.equal(applyAnswer(49, true), 50);
-assert.equal(applyAnswer(50, true), 50, "capped at 50");
+assert.equal(applyAnswer(MASTERY_THRESHOLD - 1, true), MASTERY_THRESHOLD);
+assert.equal(applyAnswer(MASTERY_THRESHOLD, true), MASTERY_THRESHOLD, "capped at threshold");
 assert.equal(applyAnswer(10, false), 10, "incorrect never changes count");
 
 // computeResults newly-mastered detection
 const idA = N5_KANJI[0].id;
 const idB = N5_KANJI[1].id;
-const before: ProgressMap = { [idA]: 49, [idB]: 10 };
-const after: ProgressMap = { [idA]: 50, [idB]: 11 };
+const before: ProgressMap = { [idA]: MASTERY_THRESHOLD - 1, [idB]: 10 };
+const after: ProgressMap = { [idA]: MASTERY_THRESHOLD, [idB]: 11 };
 const lookup = new Map(N5_KANJI.map((k) => [k.id, k]));
 const results = computeResults(
   [

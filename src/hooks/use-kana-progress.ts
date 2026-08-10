@@ -9,7 +9,7 @@ import {
   validateProgress,
   type PersistedProgress,
 } from "@/lib/persistence";
-import type { Script } from "@/types/kana";
+import { MASTERY_THRESHOLD, type Script } from "@/types/kana";
 
 interface KanaProgressState extends PersistedProgress {
   markCorrect: (script: Script, id: string) => void;
@@ -23,7 +23,7 @@ export const useKanaProgress = create<KanaProgressState>()(
       markCorrect: (script, id) =>
         set((state) => {
           const map = state[script];
-          const next = { ...map, [id]: Math.min(50, (map[id] ?? 0) + 1) };
+          const next = { ...map, [id]: Math.min(MASTERY_THRESHOLD, (map[id] ?? 0) + 1) };
           return { [script]: next } as Pick<KanaProgressState, "hiragana" | "katakana">;
         }),
       resetScript: (script) =>

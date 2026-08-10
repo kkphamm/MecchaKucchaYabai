@@ -12,11 +12,11 @@ import {
   computeResults,
   applyAnswer,
 } from "./quiz-engine.ts";
-import type { ProgressMap } from "../../types/kana.ts";
+import { MASTERY_THRESHOLD, type ProgressMap } from "../../types/kana.ts";
 
 // A — eligiblePool
 assert.equal(eligiblePool(HIRAGANA, {}).length, 115, "empty progress -> full pool");
-const allMastered: ProgressMap = Object.fromEntries(HIRAGANA.map((k) => [k.id, 50]));
+const allMastered: ProgressMap = Object.fromEntries(HIRAGANA.map((k) => [k.id, MASTERY_THRESHOLD]));
 assert.equal(eligiblePool(HIRAGANA, allMastered).length, 0, "all mastered -> empty pool");
 
 // B — quizLength
@@ -41,7 +41,7 @@ assert.equal(romajiToKana, 10, "balanced directions (romaji->kana half)");
 
 // buildQuiz — small pool (<20 eligible)
 const smallProgress: ProgressMap = Object.fromEntries(
-  HIRAGANA.slice(3).map((k) => [k.id, 50])
+  HIRAGANA.slice(3).map((k) => [k.id, MASTERY_THRESHOLD])
 );
 const smallQuiz = buildQuiz(HIRAGANA, smallProgress);
 assert.equal(smallQuiz.length, 3, "quiz length matches small eligible pool");
@@ -62,13 +62,13 @@ for (let i = 0; i < 20; i++) {
 }
 
 // G/H — applyAnswer cap
-assert.equal(applyAnswer(49, true), 50);
-assert.equal(applyAnswer(50, true), 50, "capped at 50");
+assert.equal(applyAnswer(MASTERY_THRESHOLD - 1, true), MASTERY_THRESHOLD);
+assert.equal(applyAnswer(MASTERY_THRESHOLD, true), MASTERY_THRESHOLD, "capped at threshold");
 assert.equal(applyAnswer(10, false), 10, "incorrect never changes count");
 
 // J — computeResults newly-mastered detection
-const before: ProgressMap = { "hira-a": 49, "hira-i": 10 };
-const after: ProgressMap = { "hira-a": 50, "hira-i": 11 };
+const before: ProgressMap = { "hira-a": MASTERY_THRESHOLD - 1, "hira-i": 10 };
+const after: ProgressMap = { "hira-a": MASTERY_THRESHOLD, "hira-i": 11 };
 const lookup = new Map(HIRAGANA.map((k) => [k.id, k]));
 const results = computeResults(
   [

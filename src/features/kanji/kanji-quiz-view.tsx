@@ -10,7 +10,7 @@ import { KanjiAnswerGrid } from "@/features/kanji/kanji-answer-grid";
 import { KanjiQuizFeedback } from "@/features/kanji/kanji-quiz-feedback";
 import { buildQuiz, computeResults, submitAnswer } from "@/features/kanji/kanji-quiz-engine";
 import type { KanjiCharacter, JlptLevel, KanjiQuizAnswerRecord } from "@/types/kanji";
-import type { ProgressMap } from "@/types/kana";
+import { MASTERY_THRESHOLD, type ProgressMap } from "@/types/kana";
 
 export interface KanjiQuizResults {
   correct: number;
@@ -54,7 +54,7 @@ export function KanjiQuizView({
     if (correct) {
       const before = progress[question.kanjiId] ?? 0;
       markCorrect(level, question.kanjiId);
-      if (before === 49) setJustMastered(true);
+      if (before === MASTERY_THRESHOLD - 1) setJustMastered(true);
     }
   }
 

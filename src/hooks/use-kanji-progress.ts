@@ -9,6 +9,7 @@ import {
   validateKanjiProgress,
   type PersistedKanjiProgress,
 } from "@/lib/kanji-persistence";
+import { MASTERY_THRESHOLD } from "@/types/kana";
 import type { JlptLevel } from "@/types/kanji";
 
 const LEVEL_KEY: Record<JlptLevel, "n5" | "n4"> = { N5: "n5", N4: "n4" };
@@ -26,7 +27,7 @@ export const useKanjiProgress = create<KanjiProgressState>()(
         set((state) => {
           const key = LEVEL_KEY[level];
           const map = state[key];
-          const next = { ...map, [id]: Math.min(50, (map[id] ?? 0) + 1) };
+          const next = { ...map, [id]: Math.min(MASTERY_THRESHOLD, (map[id] ?? 0) + 1) };
           return { [key]: next } as Pick<KanjiProgressState, "n5" | "n4">;
         }),
       resetLevel: (level) =>

@@ -9,7 +9,7 @@ import { QuizPrompt } from "@/features/quiz/quiz-prompt";
 import { AnswerGrid } from "@/features/quiz/answer-grid";
 import { QuizFeedback } from "@/features/quiz/quiz-feedback";
 import { buildQuiz, computeResults, submitAnswer } from "@/features/quiz/quiz-engine";
-import type { KanaCharacter, ProgressMap, QuizAnswerRecord, Script } from "@/types/kana";
+import { MASTERY_THRESHOLD, type KanaCharacter, type ProgressMap, type QuizAnswerRecord, type Script } from "@/types/kana";
 
 export interface QuizResults {
   correct: number;
@@ -54,7 +54,7 @@ export function QuizView({
     if (correct) {
       const before = progress[question.kanaId] ?? 0;
       markCorrect(script, question.kanaId);
-      if (before === 49) setJustMastered(true);
+      if (before === MASTERY_THRESHOLD - 1) setJustMastered(true);
     }
   }
 
