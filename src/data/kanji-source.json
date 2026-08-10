@@ -380,8 +380,8 @@
     "kanji": "円",
     "level": "N5",
     "meanings": [
-      "Circle",
       "Yen",
+      "Circle",
       "Round"
     ],
     "onyomi": [
@@ -1191,8 +1191,8 @@
     "kanji": "話",
     "level": "N5",
     "meanings": [
-      "Tale",
-      "Talk"
+      "Talk",
+      "Tale"
     ],
     "onyomi": [
       "わ"
@@ -1234,9 +1234,9 @@
     "kanji": "語",
     "level": "N5",
     "meanings": [
+      "Language",
       "Word",
-      "Speech",
-      "Language"
+      "Speech"
     ],
     "onyomi": [
       "ご"
@@ -2238,8 +2238,8 @@
     "kanji": "空",
     "level": "N4",
     "meanings": [
-      "Empty",
       "Sky",
+      "Empty",
       "Void",
       "Vacant",
       "Vacuum"
@@ -2308,8 +2308,8 @@
     "kanji": "安",
     "level": "N4",
     "meanings": [
-      "Relax",
       "Cheap",
+      "Relax",
       "Low",
       "Quiet",
       "Rested",
@@ -2479,8 +2479,8 @@
     "kanji": "画",
     "level": "N4",
     "meanings": [
-      "Brush-stroke",
-      "Picture"
+      "Picture",
+      "Brush-stroke"
     ],
     "onyomi": [
       "が",
@@ -2881,8 +2881,8 @@
     "kanji": "答",
     "level": "N4",
     "meanings": [
-      "Solution",
-      "Answer"
+      "Answer",
+      "Solution"
     ],
     "onyomi": [
       "とう"
@@ -2930,9 +2930,9 @@
     "kanji": "楽",
     "level": "N4",
     "meanings": [
-      "Music",
       "Comfort",
-      "Ease"
+      "Ease",
+      "Music"
     ],
     "onyomi": [
       "がく",
@@ -2991,8 +2991,8 @@
     "kanji": "始",
     "level": "N4",
     "meanings": [
-      "Commence",
-      "Begin"
+      "Begin",
+      "Commence"
     ],
     "onyomi": [
       "し"
@@ -3036,11 +3036,11 @@
     "kanji": "屋",
     "level": "N4",
     "meanings": [
-      "Roof",
-      "House",
       "Shop",
       "Dealer",
-      "Seller"
+      "Seller",
+      "House",
+      "Roof"
     ],
     "onyomi": [
       "おく"
@@ -3141,8 +3141,8 @@
     "kanji": "送",
     "level": "N4",
     "meanings": [
-      "Escort",
-      "Send"
+      "Send",
+      "Escort"
     ],
     "onyomi": [
       "そう"
@@ -3182,9 +3182,9 @@
     "kanji": "起",
     "level": "N4",
     "meanings": [
-      "Rouse",
       "Wake Up",
-      "Get Up"
+      "Get Up",
+      "Rouse"
     ],
     "onyomi": [
       "き"
@@ -3200,7 +3200,6 @@
     "kanji": "院",
     "level": "N4",
     "meanings": [
-      "Inst.",
       "Institution",
       "Temple",
       "Mansion",
@@ -3467,10 +3466,10 @@
     "kanji": "洋",
     "level": "N4",
     "meanings": [
+      "Western Style",
       "Ocean",
       "Sea",
-      "Foreign",
-      "Western Style"
+      "Foreign"
     ],
     "onyomi": [
       "よう"
@@ -3510,8 +3509,8 @@
     "kanji": "味",
     "level": "N4",
     "meanings": [
-      "Flavor",
-      "Taste"
+      "Taste",
+      "Flavor"
     ],
     "onyomi": [
       "み"
@@ -3616,8 +3615,8 @@
     "kanji": "族",
     "level": "N4",
     "meanings": [
-      "Tribe",
-      "Family"
+      "Family",
+      "Tribe"
     ],
     "onyomi": [
       "ぞく"
@@ -3628,9 +3627,9 @@
     "kanji": "着",
     "level": "N4",
     "meanings": [
-      "Don",
       "Arrive",
       "Wear",
+      "Don",
       "Counter For Suits Of Clothing"
     ],
     "onyomi": [
@@ -3801,9 +3800,9 @@
     "kanji": "私",
     "level": "N4",
     "meanings": [
-      "Private",
       "I",
-      "Me"
+      "Me",
+      "Private"
     ],
     "onyomi": [
       "し"
@@ -3878,10 +3877,10 @@
     "kanji": "計",
     "level": "N4",
     "meanings": [
-      "Plot",
       "Plan",
+      "Measure",
       "Scheme",
-      "Measure"
+      "Plot"
     ],
     "onyomi": [
       "けい"
@@ -3912,8 +3911,8 @@
     "kanji": "英",
     "level": "N4",
     "meanings": [
-      "England",
       "English",
+      "England",
       "Hero",
       "Outstanding",
       "Calyx"
@@ -4006,8 +4005,8 @@
     "kanji": "堂",
     "level": "N4",
     "meanings": [
-      "Public Chamber",
-      "Hall"
+      "Hall",
+      "Public Chamber"
     ],
     "onyomi": [
       "どう"
@@ -4069,8 +4068,8 @@
     "kanji": "質",
     "level": "N4",
     "meanings": [
-      "Substance",
       "Quality",
+      "Substance",
       "Matter",
       "Temperament"
     ],

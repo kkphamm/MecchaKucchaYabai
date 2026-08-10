@@ -1,4 +1,5 @@
 import source from "./kanji-source.json" with { type: "json" };
+import { KANJI_CATEGORY } from "./kanji-categories";
 import type { JlptLevel, KanjiCharacter } from "@/types/kanji";
 
 // Sourced from davidluzgouveia/kanji-data (KANJIDIC2-derived, jlpt_new field).
@@ -23,6 +24,7 @@ function buildLevel(level: JlptLevel): KanjiCharacter[] {
       meanings: e.meanings,
       onyomi: e.onyomi,
       kunyomi: e.kunyomi,
+      category: KANJI_CATEGORY[e.kanji] ?? "Other",
     }));
 }
 
@@ -46,6 +48,9 @@ function assertDataset() {
   for (const k of ALL_KANJI) {
     if (k.meanings.length === 0) {
       throw new Error(`Kanji ${k.kanji} has no meanings`);
+    }
+    if (!(k.kanji in KANJI_CATEGORY)) {
+      throw new Error(`Kanji ${k.kanji} is missing from KANJI_CATEGORY`);
     }
   }
 }

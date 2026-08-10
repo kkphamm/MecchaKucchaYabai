@@ -21,7 +21,7 @@ export function KanaGrid({
           preset="slide"
           as="div"
           asChild="div"
-          className="grid grid-cols-3 gap-3 md:grid-cols-4 lg:grid-cols-6 min-[1440px]:grid-cols-8"
+          className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3"
           variants={
             reducedMotion
               ? { container: { visible: { transition: { staggerChildren: 0 } } }, item: { hidden: { opacity: 0 }, visible: { opacity: 1 } } }

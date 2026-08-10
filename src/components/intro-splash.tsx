@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { TextRoll } from "@/components/core/text-roll";
+import { TextScramble } from "@/components/core/text-scramble";
 
 const INTRO_KEY = "mkya:intro-played";
 const SWOOSH_DURATION_MS = 600;
@@ -37,13 +37,12 @@ export function IntroSplash() {
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  // Measure the rolling text's on-screen position the instant the roll
-  // finishes, so the swoosh can animate plain top/left pixel values from
+  // Measure the scrambling text's on-screen position the instant it
+  // settles, so the swoosh can animate plain top/left pixel values from
   // there to the corner — explicit and reliable, unlike `layout`'s
   // automatic FLIP, which doesn't handle a flex-centered -> fixed-corner
-  // positioning-scheme jump (and was distorting TextRoll's own letter
-  // transforms in the process).
-  function handleRollDone() {
+  // positioning-scheme jump.
+  function handleScrambleDone() {
     const rect = rollingTextRef.current?.getBoundingClientRect();
     if (rect) setStartRect({ top: rect.top, left: rect.left });
     setPhase("swooshing");
@@ -67,7 +66,9 @@ export function IntroSplash() {
                 className="whitespace-nowrap font-ham text-foreground"
                 style={{ fontSize: BASE_FONT_PX }}
               >
-                <TextRoll onDone={handleRollDone}>MecchaKucchaYabai</TextRoll>
+                <TextScramble duration={1.2} speed={0.045} onScrambleComplete={handleScrambleDone}>
+                  MecchaKucchaYabai
+                </TextScramble>
               </span>
             </div>
           )}

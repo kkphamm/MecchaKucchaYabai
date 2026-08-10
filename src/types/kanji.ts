@@ -1,6 +1,8 @@
 import type { ProgressMap } from "@/types/kana";
+import type { KanjiCategory } from "@/data/kanji-categories";
 
 export type JlptLevel = "N5" | "N4";
+export type { KanjiCategory };
 
 export interface KanjiCharacter {
   id: string;
@@ -9,6 +11,7 @@ export interface KanjiCharacter {
   meanings: string[];
   onyomi: string[];
   kunyomi: string[];
+  category: KanjiCategory;
 }
 
 export interface KanjiQuizQuestion {

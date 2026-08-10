@@ -1,8 +1,8 @@
 "use client";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { AnimatedBackground } from "@/components/core/animated-background";
-import { TextRoll } from "@/components/core/text-roll";
+import { TextScramble } from "@/components/core/text-scramble";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
@@ -18,14 +18,19 @@ export function AppShell({ children }: { children: ReactNode }) {
   const router = useRouter();
   const reducedMotion = useReducedMotion();
   const active = SECTIONS.find((s) => s.href === pathname)?.id ?? "hiragana";
+  const [scrambleKey, setScrambleKey] = useState(0);
 
   return (
     <div className="flex min-h-full flex-1 flex-col bg-background">
       <header className="sticky top-0 z-20 bg-background/95 backdrop-blur-sm">
         <div className="relative flex w-full items-center gap-4 py-3 pl-3 pr-3">
-          <TextRoll className="shrink-0 font-ham text-[28px] tracking-tight text-foreground">
+          <TextScramble
+            key={scrambleKey}
+            onMouseEnter={() => setScrambleKey((k) => k + 1)}
+            className="shrink-0 font-ham text-[28px] tracking-tight text-foreground"
+          >
             MKY
-          </TextRoll>
+          </TextScramble>
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <div
               role="tablist"
